@@ -4,6 +4,7 @@ notify.py
 '''
 
 import requests
+import time
 from token_nur_am_Lokale import token, chat_id
 
 # example:
@@ -49,13 +50,15 @@ class tell_my_bot():
                         'disable_web_page_preview':'True',
                         'parse_mode':'HTML',
                         }
-                else:
+                elif type(each_useful_item) == str:
                     bot_params = {
                         'chat_id':self.chat_id,
                         'disable_web_page_preview':'True',
                         'text':'-----------↓ 关键词:{} ↓------------'.format(each_useful_item),
                         }
                 requests.get(self.api_base, headers = self.header, params = bot_params)
+                time.sleep(0.2)
+                
         elif news == 'bad_news':
             bot_params = {
                     'chat_id':self.chat_id,
