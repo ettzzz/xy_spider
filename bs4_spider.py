@@ -1,11 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Mar  3 20:04:55 2019
-
-@author: eriti
-"""
-
 
 '''
 xianyu mornitor
@@ -19,13 +12,14 @@ import time
 import pandas as pd
 import os
 
-#items_dict = {
+#input should be like
+#     {
 #                {'search_word':'gtx970', 'price_boundary':[50, 100], 'keywords':['冰龙'], 'stopwords':['回收']},
 #        }
 
 #results should be like [{'gtx970~￥880.00':'hisurl'},{'charger~￥400.00':'herurl'}]
 
-class xianyu_spider(): # including search_word, price_boundary, keywords, stopwords
+class xianyu_spider(): 
     def __init__(self):
         self.batch_size = 1000
         self.batch_memory = []
@@ -39,7 +33,7 @@ class xianyu_spider(): # including search_word, price_boundary, keywords, stopwo
           AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20'}
         
 
-    def build_pool(self, item_obj): #according item list to generate pool for useful items and pool for batch_memory
+    def build_pool(self, item_obj): 
 #        title = item_obj.find('h4.item-title', first = True).text
 #        link = item_obj.find('div.item-info > h4 > a', first = True).attrs['href']
 #        price = item_obj.find('span.price > em', first = True).text
@@ -113,7 +107,7 @@ class xianyu_spider(): # including search_word, price_boundary, keywords, stopwo
             
             
 
-    def clean_cache(self, category = 'pool'): #only use when one notification is finished
+    def clean_cache(self, category = 'pool'): #only use when one notification is delivered
         if category == 'pool':
             self.useful_items = []
         elif category == 'failure_counter':
@@ -123,7 +117,7 @@ class xianyu_spider(): # including search_word, price_boundary, keywords, stopwo
         
     
     def notify_trigger(self):
-        if len(self.useful_items) != 0:
+        if len(self.useful_items) > 1:
             return True
         else:
             return False
