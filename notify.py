@@ -4,10 +4,12 @@ notify.py
 '''
 
 import requests
+from token_nur_am_Lokale import token, chat_id
+
 # example:
 '''
-https://api.telegram.org/bot781431817:AAEt1G2VaqMyu4OARKLnufp6eqBnHz6zORU/
-sendMessage?chat_id=476917241&
+https://api.telegram.org/bot7dfdasfsdafasdfdsafsafasad/
+sendMessage?chat_id=1234567&
 text=hereiswhatyougot%0a%3Ca%20href=%22http://www.google.com/%22%3Einline%20URL%3C/a%3E&parse_mode=HTML
 '''
 # and url transfer https://blog.csdn.net/Tangzongyu123/article/details/75224468
@@ -21,8 +23,8 @@ class tell_my_bot():
     
     def __init__(self):
         # we need a results pool here
-        self.token = '781431817:AAEt1G2VaqMyu4OARKLnufp6eqBnHz6zORU'
-        self.chat_id = '476917241'
+        self.token = token
+        self.chat_id = chat_id
         self.api_base = 'https://api.telegram.org/bot{}/sendMessage'.format(self.token)
         self.header = {'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) \
           AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20'}
