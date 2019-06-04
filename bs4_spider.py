@@ -25,7 +25,7 @@ class xianyu_spider():
         self.pages = 5
         self.failure_counter = 0
         self.path = os.path.realpath('run.py').split('run.py')[0]
-        self.base_url = 'https://s.2.taobao.com/list/list.htm'
+        self.base_url = 'https://s.2.taobao.com/list'
         self.header = {'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) \
           AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20'}
         
@@ -48,10 +48,13 @@ class xianyu_spider():
         
 #        description = item_obj.find('div.item-description', first = True).text
         description = item_obj.select('div.item-description')[0].text
+        title = item_obj.select('div.item-title')[0].text
         
         if any(each_kw in description for each_kw in category['keywords']):
             judgement = True
         if any(each_sw in description for each_sw in category['stopwords']):
+            judgement = False
+        if any(each_sw in title for each_sw in category['stopwords']):
             judgement = False
             
         if judgement:
