@@ -48,7 +48,7 @@ class xianyu_spider():
         
 #        description = item_obj.find('div.item-description', first = True).text
         description = item_obj.select('div.item-description')[0].text
-        title = item_obj.select('div.item-title')[0].text
+        title = item_obj.select('h4.item-title')[0].text
         
         if any(each_kw in description for each_kw in category['keywords']):
             judgement = True
@@ -135,3 +135,21 @@ class xianyu_spider():
         self.batch_memory = list(map(str, list(cache_list['0'])))
 
 
+if __name__ == "__main__":
+    categories = [
+#        {'search_word':'gtx970', 'price_boundary':[550, 750], 'keywords':['冰龙','超级冰龙','红龙','名人堂','龙骑士','至尊','烈焰'], 'stopwords':['回收','收','高价','网吧']},
+        {'search_word':'gtx960', 'price_boundary':[250, 350], 'keywords':['冰龙','超级冰龙','红龙','名人堂','龙骑士','至尊','烈焰'], 'stopwords':['回收','收','高价','网吧']},
+#        {'search_word':'gx450', 'price_boundary':[100, 300], 'keywords':['酷冷','450'], 'stopwords':['回收','收','高价']},
+#        {'search_word':'amd专用条 ddr3', 'price_boundary':[50, 100], 'keywords':['amd','8100','专用'], 'stopwords':['回收','收','高价','金士顿']},
+#        {'search_word':'ps4 slim', 'price_boundary':[1200, 1600], 'keywords':['自用','pro'], 'stopwords':['回收','收','高价','求']},
+        ]
+    agent = xianyu_spider()
+    try:
+         agent.read_memory()
+    except:
+        pass
+    
+#    for each_category in categories:
+    each_category = categories[0]
+    agent.add_split(each_category)
+    agent.spider(each_category)
